@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>API settings</title>
+        <title lang="de-DE">API Einstellungen</title>
+
+        <input-field>
+            <name>apiHost</name>
+            <label>API Host</label>
+            <defaultValue>https://api-sandbox.axytos.com/</defaultValue>
+        </input-field>
+
+        <input-field type="password">
+            <name>apiKey</name>
+            <label>API Key</label>
+        </input-field>
+
+        <component name="credentials-validation-button">
+            <name>CredentialsValidationButton</name>
+        </component>
+    </card>
+
+    <card>
+        <title>Payment classification</title>
+        <title lang="de-DE">Zahlarteneinstufung</title>
+
+        <component name="sw-entity-multi-id-select">
+            <name>safePaymentMethods</name>
+            <entity>payment_method</entity>
+            <label>Safe payment methods</label>
+            <label lang="de-DE">Sichere Zahlarten</label>
+        </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>unsafePaymentMethods</name>
+            <entity>payment_method</entity>
+            <label>Unsafe payment methods</label>
+            <label lang="de-DE">Unsichere Zahlarten</label>
+        </component>
+
+        <component name="sw-entity-multi-id-select">
+            <name>ignoredPaymentMethods</name>
+            <entity>payment_method</entity>
+            <label>Ignored payment methods</label>
+            <label lang="de-DE">Ignorierte Zahlarten</label>
+        </component>
+    </card>
+
+    <card>
+        <title>Payment methods classification fallback</title>
+        <title lang="de-DE">Zahlarteneinstufung Fallback</title>
+
+        <input-field type="single-select">
+            <name>fallBackMode</name>
+            <options>
+                <option>
+                    <id>NO_UNSAFE_PAYMENT_METHODS</id>
+                    <name>No unsafe payment methods</name>
+                    <name lang="de-DE">Keine unsicheren Zahlarten</name>
+                </option>
+                <option>
+                    <id>IGNORED_AND_NOT_CONFIGURED_PAYMENT_METHODS</id>
+                    <name>Only ignored payment methods</name>
+                    <name lang="de-DE">Nur ignorierte Zahlarten</name>
+                </option>
+                <option>
+                    <id>ALL_PAYMENT_METHODS</id>
+                    <name>All payment methods</name>
+                    <name lang="de-DE">Alle Zahlarten</name>
+                </option>
+            </options>
+        </input-field>
+    </card>
+
+</config>
