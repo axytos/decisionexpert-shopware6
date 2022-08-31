@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Configuration;
 
@@ -13,14 +15,11 @@ class PluginConfigurationValidator
 
     public function isInvalid(): bool
     {
-        try 
-        {
+        try {
             return $this->apiKeyIsNotConfigured()
-                || $this->paymentMethodsAreNotConfigured();    
-        } 
-        catch (\Throwable $th) 
-        {
-            return true;   
+                || $this->paymentMethodsAreNotConfigured();
+        } catch (\Throwable $th) {
+            return true;
         }
     }
 

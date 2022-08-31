@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Core;
 
@@ -21,8 +23,8 @@ class PaymentControlOrderDataFactory
         CustomerDataDtoFactory $customerDataDtoFactory,
         DeliveryAddressDtoFactory $deliveryAddressDtoFactory,
         InvoiceAddressDtoFactory $invoiceAddressDtoFactory,
-        PaymentControlBasketDtoFactory $paymentControlBasketDtoFactory)
-    {
+        PaymentControlBasketDtoFactory $paymentControlBasketDtoFactory
+    ) {
         $this->customerDataDtoFactory = $customerDataDtoFactory;
         $this->deliveryAddressDtoFactory = $deliveryAddressDtoFactory;
         $this->invoiceAddressDtoFactory = $invoiceAddressDtoFactory;

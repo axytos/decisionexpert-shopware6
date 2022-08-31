@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Client;
 
@@ -19,8 +21,7 @@ class FallbackModeConfiguration implements FallbackModeConfigurationInterface
     {
         $value = $this->pluginConfig->getFallbackMode();
 
-        switch ($value)
-        {
+        switch ($value) {
             case 'ALL_PAYMENT_METHODS':
                 return FallbackModes::ALL_PAYMENT_METHODS;
             case 'NO_UNSAFE_PAYMENT_METHODS':

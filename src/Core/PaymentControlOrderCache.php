@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Core;
 
@@ -23,8 +25,8 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
         string $orderId,
         SalesChannelContext $salesChannelContext,
         OrderEntityRepository $orderEntityRepository,
-        DtoArrayMapper $dtoArrayMapper)
-    {
+        DtoArrayMapper $dtoArrayMapper
+    ) {
         $this->orderId = $orderId;
         $this->salesChannelContext = $salesChannelContext;
         $this->orderEntityRepository = $orderEntityRepository;
@@ -35,8 +37,7 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
     {
         $customFields = $this->orderEntityRepository->getCustomFields($this->orderId, $this->getContext());
 
-        if (!array_key_exists(self::CUSTOM_FIELD_NAME_CHECK_RESPONSE, $customFields))
-        {
+        if (!array_key_exists(self::CUSTOM_FIELD_NAME_CHECK_RESPONSE, $customFields)) {
             return null;
         }
 
@@ -56,8 +57,7 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
     {
         $customFields = $this->orderEntityRepository->getCustomFields($this->orderId, $this->getContext());
 
-        if (!array_key_exists(self::CUSTOM_FIELD_NAME_DATA_HASH, $customFields))
-        {
+        if (!array_key_exists(self::CUSTOM_FIELD_NAME_DATA_HASH, $customFields)) {
             return null;
         }
 

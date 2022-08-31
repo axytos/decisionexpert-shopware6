@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Configuration;
 
@@ -51,8 +53,7 @@ class PluginConfiguration
     {
         $value = $this->systemConfigService->get($key);
 
-        if (!is_array($value))
-        {
+        if (!is_array($value)) {
             return [];
         }
 

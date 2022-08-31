@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Core;
 
@@ -13,8 +15,8 @@ class PaymentControlOrderCacheFactory
 
     public function __construct(
         OrderEntityRepository $orderEntityRepository,
-        DtoArrayMapper $dtoArrayMapper)
-    {
+        DtoArrayMapper $dtoArrayMapper
+    ) {
         $this->orderEntityRepository = $orderEntityRepository;
         $this->dtoArrayMapper = $dtoArrayMapper;
     }
@@ -22,9 +24,10 @@ class PaymentControlOrderCacheFactory
     public function create(string $orderId, SalesChannelContext $salesChannelContext): PaymentControlOrderCache
     {
         return new PaymentControlOrderCache(
-            $orderId, 
-            $salesChannelContext, 
-            $this->orderEntityRepository, 
-            $this->dtoArrayMapper);
+            $orderId,
+            $salesChannelContext,
+            $this->orderEntityRepository,
+            $this->dtoArrayMapper
+        );
     }
 }

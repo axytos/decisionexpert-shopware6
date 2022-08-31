@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Core;
 
@@ -46,8 +48,8 @@ class PaymentServiceDecorator extends PaymentService
         OrderCheckProcessStateMachine $orderCheckProcessStateMachine,
         PaymentMethodPredicates $paymentMethodPredicates,
         ErrorHandler $errorHandler,
-        OrderStateMachine $orderStateMachine)
-    {
+        OrderStateMachine $orderStateMachine
+    ) {
         $this->decorated = $decorated;
         $this->pluginConfigurationValidator = $pluginConfigurationValidator;
         $this->orderEntityRepository = $orderEntityRepository;
@@ -66,18 +68,14 @@ class PaymentServiceDecorator extends PaymentService
         RequestDataBag $dataBag,
         SalesChannelContext $context,
         ?string $finishUrl = null,
-        ?string $errorUrl = null): ?RedirectResponse
-    {
-        try 
-        {
-            if ($this->pluginConfigurationValidator->isInvalid())
-            {
+        ?string $errorUrl = null
+    ): ?RedirectResponse {
+        try {
+            if ($this->pluginConfigurationValidator->isInvalid()) {
                 return $this->completeOrder($orderId, $dataBag, $context, $finishUrl, $errorUrl);
             }
             return $this->executePaymentControl($orderId, $dataBag, $context, $finishUrl, $errorUrl);
-        }
-        catch (Throwable $t)
-        {
+        } catch (Throwable $t) {
             $this->errorHandler->handle($t);
             return $this->completeOrder($orderId, $dataBag, $context, $finishUrl, $errorUrl);
         }
@@ -88,10 +86,9 @@ class PaymentServiceDecorator extends PaymentService
         RequestDataBag $dataBag,
         SalesChannelContext $context,
         ?string $finishUrl = null,
-        ?string $errorUrl = null): ?RedirectResponse
-    {
-        try 
-        {
+        ?string $errorUrl = null
+    ): ?RedirectResponse {
+        try {
             $this->orderCheckProcessStateMachine->setUnchecked($orderId, $context);
 
             $order = $this->orderEntityRepository->findOrder($orderId, $context->getContext());
@@ -101,13 +98,11 @@ class PaymentServiceDecorator extends PaymentService
 
             $this->orderCheckProcessStateMachine->setChecked($orderId, $context);
 
-            if ($paymentControlAction === PaymentControlAction::CHANGE_PAYMENT_METHOD)
-            {
+            if ($paymentControlAction === PaymentControlAction::CHANGE_PAYMENT_METHOD) {
                 return $this->changePaymentMethod($orderId, $context);
             }
 
-            if ($paymentControlAction === PaymentControlAction::CANCEL_ORDER)
-            {
+            if ($paymentControlAction === PaymentControlAction::CANCEL_ORDER) {
                 return $this->cancelOrder($orderId, $context);
             }
 
@@ -116,13 +111,10 @@ class PaymentServiceDecorator extends PaymentService
             $this->orderCheckProcessStateMachine->setConfirmed($orderId, $context);
 
             return $this->completeOrder($orderId, $dataBag, $context, $finishUrl, $errorUrl);
-        }
-        catch (PaymentControlCheckFailedException | PaymentControlConfirmFailedException $e)
-        {
+        } catch (PaymentControlCheckFailedException | PaymentControlConfirmFailedException $e) {
             $this->orderCheckProcessStateMachine->setFailed($orderId, $context);
 
-            if (!$this->usesAllowedFallbackPaymentMethod($context))
-            {
+            if (!$this->usesAllowedFallbackPaymentMethod($context)) {
                 return $this->changePaymentMethodWithError($orderId, $context);
             }
 
@@ -159,8 +151,8 @@ class PaymentServiceDecorator extends PaymentService
         RequestDataBag $dataBag,
         SalesChannelContext $context,
         ?string $finishUrl = null,
-        ?string $errorUrl = null): ?RedirectResponse
-    {
+        ?string $errorUrl = null
+    ): ?RedirectResponse {
         return $this->decorated->handlePaymentByOrder($orderId, $dataBag, $context, $finishUrl, $errorUrl);
     }
 
