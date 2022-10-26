@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Tests\Client;
 
@@ -33,12 +35,12 @@ class PaymentMethodConfigurationTest extends TestCase
      * @dataProvider isSafeTestDataProvider
      */
     public function test_isSafe(
-        string $paymentMethodId, 
+        string $paymentMethodId,
         array $safePaymentMethodIds,
         array $unsafePaymentMethodIds,
         array $ignoredPaymentMethodIds,
-        bool $expectedOutcome): void
-    {
+        bool $expectedOutcome
+    ): void {
         $this->pluginConfiguration->method('getSafePaymentMethods')->willReturn($safePaymentMethodIds);
         $this->pluginConfiguration->method('getUnsafePaymentMethods')->willReturn($unsafePaymentMethodIds);
         $this->pluginConfiguration->method('getIgnoredPaymentMethods')->willReturn($ignoredPaymentMethodIds);
@@ -71,12 +73,12 @@ class PaymentMethodConfigurationTest extends TestCase
      * @dataProvider isUnsafeTestDataProvider
      */
     public function test_isUnsafe(
-        string $paymentMethodId, 
+        string $paymentMethodId,
         array $safePaymentMethodIds,
         array $unsafePaymentMethodIds,
         array $ignoredPaymentMethodIds,
-        bool $expectedOutcome): void
-    {
+        bool $expectedOutcome
+    ): void {
         $this->pluginConfiguration->method('getSafePaymentMethods')->willReturn($safePaymentMethodIds);
         $this->pluginConfiguration->method('getUnsafePaymentMethods')->willReturn($unsafePaymentMethodIds);
         $this->pluginConfiguration->method('getIgnoredPaymentMethods')->willReturn($ignoredPaymentMethodIds);
@@ -109,12 +111,12 @@ class PaymentMethodConfigurationTest extends TestCase
      * @dataProvider isIgnoredTestDataProvider
      */
     public function test_isIgnored(
-        string $paymentMethodId, 
+        string $paymentMethodId,
         array $safePaymentMethodIds,
         array $unsafePaymentMethodIds,
         array $ignoredPaymentMethodIds,
-        bool $expectedOutcome): void
-    {
+        bool $expectedOutcome
+    ): void {
         $this->pluginConfiguration->method('getSafePaymentMethods')->willReturn($safePaymentMethodIds);
         $this->pluginConfiguration->method('getUnsafePaymentMethods')->willReturn($unsafePaymentMethodIds);
         $this->pluginConfiguration->method('getIgnoredPaymentMethods')->willReturn($ignoredPaymentMethodIds);
@@ -146,12 +148,12 @@ class PaymentMethodConfigurationTest extends TestCase
      * @dataProvider isNotConfiguredTestDataProvider
      */
     public function test_isNotConfigured(
-        string $paymentMethodId, 
+        string $paymentMethodId,
         array $safePaymentMethodIds,
         array $unsafePaymentMethodIds,
         array $ignoredPaymentMethodIds,
-        bool $expectedOutcome): void
-    {
+        bool $expectedOutcome
+    ): void {
         $this->pluginConfiguration->method('getSafePaymentMethods')->willReturn($safePaymentMethodIds);
         $this->pluginConfiguration->method('getUnsafePaymentMethods')->willReturn($unsafePaymentMethodIds);
         $this->pluginConfiguration->method('getIgnoredPaymentMethods')->willReturn($ignoredPaymentMethodIds);

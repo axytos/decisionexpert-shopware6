@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Tests\Core;
 
@@ -60,7 +62,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         );
     }
 
-    public function test_create_maps_paymentMethodId_correctly() : void
+    public function test_create_maps_paymentMethodId_correctly(): void
     {
         $paymentMethodId = 'paymentMethodId';
         /** @var SalesChannelContext&MockObject $salesChannelContext */
@@ -83,7 +85,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $this->assertSame($paymentMethodId, $actual->paymentMethodId);
     }
 
-    public function test_create_maps_deliveryAddress_correctly() : void
+    public function test_create_maps_deliveryAddress_correctly(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -121,7 +123,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getDeliveries')
             ->willReturn($deliveries);
-        
+
         $deliveries
             ->method('getElements')
             ->willReturn($deliveryElements);
@@ -133,15 +135,15 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getStreet')
             ->willReturn($street);
-        
+
         $shippingOrderAddress
             ->method('getCity')
             ->willReturn($city);
-        
+
         $shippingOrderAddress
             ->method('getCompany')
             ->willReturn($company);
-    
+
         $shippingOrderAddress
             ->method('getFirstName')
             ->willReturn($firstname);
@@ -169,7 +171,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getCountryState')
             ->willReturn($countryState);
-        
+
         $countryState
             ->method('getName')
             ->willReturn($stateName);
@@ -177,7 +179,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getSalutation')
             ->willReturn($salutation);
-        
+
         $salutation
             ->method('getDisplayName')
             ->willReturn($salutationDisplayName);
@@ -186,7 +188,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
             ->method("getTaxRate")
             ->willReturn(19.0);
 
-        
+
 
         $actual = $this->sut->create($order, $salesChannelContext);
 
@@ -202,7 +204,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $this->assertSame($salutationDisplayName, $actual->deliveryAddress->salutation);
     }
 
-    public function test_create_maps_invoice_correctly() : void
+    public function test_create_maps_invoice_correctly(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -235,15 +237,15 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $billingAddress
             ->method('getStreet')
             ->willReturn($street);
-        
+
         $billingAddress
             ->method('getCity')
             ->willReturn($city);
-        
+
         $billingAddress
             ->method('getCompany')
             ->willReturn($company);
-    
+
         $billingAddress
             ->method('getFirstName')
             ->willReturn($firstname);
@@ -271,7 +273,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $billingAddress
             ->method('getCountryState')
             ->willReturn($countryState);
-        
+
         $countryState
             ->method('getName')
             ->willReturn($stateName);
@@ -279,7 +281,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $billingAddress
             ->method('getSalutation')
             ->willReturn($salutation);
-        
+
         $salutation
             ->method('getDisplayName')
             ->willReturn($salutationDisplayName);
@@ -298,7 +300,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $this->assertSame($salutationDisplayName, $actual->invoiceAddress->salutation);
     }
 
-    public function test_create_maps_basket_correctly() : void
+    public function test_create_maps_basket_correctly(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -374,7 +376,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItem2Product
             ->method('getProductNumber')
             ->willReturn($lineItem2ProductNumber);
-        
+
         $lineItemElement1
             ->method('getUniqueIdentifier')
             ->willReturn('LineItem1');
@@ -392,11 +394,11 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $currency
             ->method('getIsoCode')
             ->willReturn($isoCode);
-        
+
         $order
             ->method('getAmountTotal')
             ->willReturn($amountTotal);
-    
+
         $order
             ->method('getAmountNet')
             ->willReturn($amountNet);
@@ -404,7 +406,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getLineItems')
             ->willReturn($lineItems);
-        
+
         $order->method("getShippingCosts")->willReturn($shippingCosts);
 
         $shippingCosts->method("getCalculatedTaxes")->willReturn(new CalculatedTaxCollection([$calculatedTax]));
@@ -414,7 +416,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItemElement1
             ->method('getProduct')
             ->willReturn($lineItem1Product);
-        
+
         $lineItemElement1
             ->method('getTotalPrice')
             ->willReturn($lineItem1TotalPrice);
@@ -430,7 +432,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItemElement1
             ->method('getPrice')
             ->willReturn($lineItem1Price);
-        
+
         $lineItem1Price
             ->method('getTotalPrice')
             ->willReturn($lineItem1TotalPrice);
@@ -438,15 +440,15 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItem1Vat
             ->method('getTax')
             ->willReturn($lineItem1VatTax);
-        
+
         $lineItem1Vat
             ->method('getTaxRate')
             ->willReturn($lineItem1VatTaxRate);
-        
+
         $lineItem1Vat
             ->method('getPrice')
             ->willReturn($lineItem1TotalPrice);
-        
+
         $lineItem1Price
             ->method('getCalculatedTaxes')
             ->willReturn(new CalculatedTaxCollection($lineItem1CalculatedTaxElements));
@@ -454,7 +456,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItemElement2
             ->method('getProduct')
             ->willReturn($lineItem2Product);
-        
+
         $lineItemElement2
             ->method('getTotalPrice')
             ->willReturn($lineItem2TotalPrice);
@@ -470,7 +472,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItemElement2
             ->method('getPrice')
             ->willReturn($lineItem2Price);
-        
+
         $lineItem2Price
             ->method('getTotalPrice')
             ->willReturn($lineItem2TotalPrice);
@@ -478,33 +480,33 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $lineItem2Vat1
             ->method('getTax')
             ->willReturn($lineItem2Vat1Tax);
-        
+
         $lineItem2Vat1
             ->method('getTaxRate')
             ->willReturn($lineItem2Vat1TaxRate);
-        
+
         $lineItem2Vat1
             ->method('getPrice')
             ->willReturn($lineItem2Vat1Price);
-        
+
         $lineItem2Vat2
             ->method('getTax')
             ->willReturn($lineItem2Vat2Tax);
-        
+
         $lineItem2Vat2
             ->method('getTaxRate')
             ->willReturn($lineItem2Vat2TaxRate);
-        
+
         $lineItem2Vat1
             ->method('getPrice')
             ->willReturn($lineItem2Vat2Price);
-        
+
         $lineItem2Price
             ->method('getCalculatedTaxes')
             ->willReturn(new CalculatedTaxCollection($lineItem2CalculatedTaxElements));
 
-        
-        
+
+
         $actual = $this->sut->create($order, $salesChannelContext);
 
         $this->assertSame($isoCode, $actual->basket->currency);
@@ -524,10 +526,9 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $this->assertSame($lineItem2Vat1TaxRate + $lineItem2Vat2TaxRate, $actual->basket->positions[1]->taxPercent);
         $this->assertSame("Shipping", $actual->basket->positions[2]->productName);
         $this->assertSame("0", $actual->basket->positions[2]->productId);
-
     }
 
-    public function test_create_maps_personalData_correctly_without_existing_customer() : void
+    public function test_create_maps_personalData_correctly_without_existing_customer(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -543,7 +544,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -555,19 +556,19 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn(null);
-        
+
         $actual = $this->sut->create($order, $salesChannelContext);
 
         $this->assertSame($email, $actual->personalData->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->personalData->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->personalData->externalCustomerId);
         $this->assertSame(null, $actual->personalData->dateOfBirth);
     }
 
-    public function test_create_maps_personalData_correctly_for_existing_customer_without_birthdate() : void
+    public function test_create_maps_personalData_correctly_for_existing_customer_without_birthdate(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -585,7 +586,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -597,7 +598,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -605,15 +606,15 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn(null);
-        
+
         $actual = $this->sut->create($order, $salesChannelContext);
 
         $this->assertSame($email, $actual->personalData->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->personalData->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->personalData->externalCustomerId);
         $this->assertSame(null, $actual->personalData->dateOfBirth);
     }
 
-    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_type() : void
+    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_type(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -633,7 +634,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -645,7 +646,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -653,16 +654,16 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn($dateTime);
-        
+
         $actual = $this->sut->create($order, $salesChannelContext);
 
         $this->assertSame($email, $actual->personalData->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->personalData->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->personalData->externalCustomerId);
         $this->assertNotNull($actual->personalData->dateOfBirth);
         $this->assertSame($dateTime->getTimestamp(), $actual->personalData->dateOfBirth->getTimestamp());
     }
-    
-    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_immutable_type() : void
+
+    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_immutable_type(): void
     {
         /** @var SalesChannelContext&MockObject $salesChannelContext */
         $salesChannelContext = $this->createMock(SalesChannelContext::class);
@@ -683,11 +684,11 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
-        
+
         $orderCustomer
             ->method('getCompany')
             ->willReturn($company);
@@ -699,7 +700,7 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -707,15 +708,14 @@ class PaymentControlOrderDataFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn($dateTimeImmutable);
-        
+
         $actual = $this->sut->create($order, $salesChannelContext);
 
         $this->assertSame($email, $actual->personalData->email);
         /** @phpstan-ignore-next-line */
         $this->assertSame($company, $actual->personalData->company->name);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->personalData->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->personalData->externalCustomerId);
         $this->assertNotNull($actual->personalData->dateOfBirth);
         $this->assertSame($dateTimeImmutable->getTimestamp(), $actual->personalData->dateOfBirth->getTimestamp());
     }
-
 }

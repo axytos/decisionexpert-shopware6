@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Tests;
 
@@ -17,7 +19,7 @@ class PluginConfigurationTest extends TestCase
     public function setUp(): void
     {
         $this->systemConfigService = $this->createMock(SystemConfigService::class);
-        
+
         $this->sut = new PluginConfiguration($this->systemConfigService);
     }
 
@@ -72,12 +74,11 @@ class PluginConfigurationTest extends TestCase
     {
         $notArrayValues = [5, 3.0, true, 'a string', null];
 
-        foreach($notArrayValues as $notArrayValue)
-        {
+        foreach ($notArrayValues as $notArrayValue) {
             $this->setSystemConfigServiceReturnValue(PluginConfigurationValueNames::SAFE_PAYMENT_METHODS, $notArrayValue);
 
             $result = $this->sut->getSafePaymentMethods();
-    
+
             $this->assertIsArray($result);
             $this->assertEmpty($result);
         }
@@ -97,12 +98,11 @@ class PluginConfigurationTest extends TestCase
     {
         $notArrayValues = [5, 3.0, true, 'a string', null];
 
-        foreach($notArrayValues as $notArrayValue)
-        {
+        foreach ($notArrayValues as $notArrayValue) {
             $this->setSystemConfigServiceReturnValue(PluginConfigurationValueNames::UNSAFE_PAYMENT_METHODS, $notArrayValue);
 
             $result = $this->sut->getUnsafePaymentMethods();
-    
+
             $this->assertIsArray($result);
             $this->assertEmpty($result);
         }
@@ -122,15 +122,14 @@ class PluginConfigurationTest extends TestCase
     {
         $notArrayValues = [5, 3.0, true, 'a string', null];
 
-        foreach($notArrayValues as $notArrayValue)
-        {
+        foreach ($notArrayValues as $notArrayValue) {
             $this->setSystemConfigServiceReturnValue(PluginConfigurationValueNames::IGNORED_PAYMENT_METHODS, $notArrayValue);
 
             $result = $this->sut->getIgnoredPaymentMethods();
-    
+
             $this->assertIsArray($result);
             $this->assertEmpty($result);
-        }        
+        }
     }
 
     public function test_getFallbackMode_returns_fallback_mode_from_configuration(): void

@@ -51,6 +51,7 @@ class PluginConfiguration
     /** @return string[] */
     private function getArray(string $key)
     {
+        /** @var string[] */
         $value = $this->systemConfigService->get($key);
 
         if (!is_array($value)) {

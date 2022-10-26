@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\DecisionExpert\Shopware\Tests;
 
@@ -18,7 +20,7 @@ class PluginConfigurationValidatorTest extends TestCase
     public function setUp(): void
     {
         $this->pluginConfiguration = $this->createMock(PluginConfiguration::class);
-        
+
         $this->sut = new PluginConfigurationValidator($this->pluginConfiguration);
     }
 
@@ -26,12 +28,12 @@ class PluginConfigurationValidatorTest extends TestCase
      * @dataProvider isInvalidTestDataProvider
      */
     public function test_isInvalid(
-        string $apiKey, 
+        string $apiKey,
         array $safePaymentMethodIds,
         array $unsafePaymentMethodIds,
         array $ignoredPaymentMethodIds,
-        bool $expectedOutcome): void
-    {
+        bool $expectedOutcome
+    ): void {
         $this->pluginConfiguration->method('getApiKey')->willReturn($apiKey);
         $this->pluginConfiguration->method('getSafePaymentMethods')->willReturn($safePaymentMethodIds);
         $this->pluginConfiguration->method('getUnsafePaymentMethods')->willReturn($unsafePaymentMethodIds);
@@ -78,7 +80,7 @@ class PluginConfigurationValidatorTest extends TestCase
     public function test_isInvalid_returns_true_getUnsafePaymentMethods_throws_Exception(): void
     {
         $this->pluginConfiguration->method('getApiKey')->willReturn('apiKey');
-        
+
         $this->pluginConfiguration
             ->expects($this->once())
             ->method('getUnsafePaymentMethods')
@@ -90,7 +92,7 @@ class PluginConfigurationValidatorTest extends TestCase
     public function test_isInvalid_returns_true_getIgnoredPaymentMethods_throws_Exception(): void
     {
         $this->pluginConfiguration->method('getApiKey')->willReturn('apiKey');
-        
+
         $this->pluginConfiguration
             ->expects($this->once())
             ->method('getIgnoredPaymentMethods')
