@@ -16,25 +16,41 @@ class PaymentMethodConfiguration implements PaymentMethodConfigurationInterface
         $this->pluginConfig = $pluginConfig;
     }
 
-    public function isIgnored(string $paymentMethodId): bool
+    /**
+     * @param string $paymentMethodId
+     * @return bool
+     */
+    public function isIgnored($paymentMethodId)
     {
         $ignoredPaymentMethodIds = $this->pluginConfig->getIgnoredPaymentMethods();
         return in_array($paymentMethodId, $ignoredPaymentMethodIds);
     }
 
-    public function isSafe(string $paymentMethodId): bool
+    /**
+     * @param string $paymentMethodId
+     * @return bool
+     */
+    public function isSafe($paymentMethodId)
     {
         $safePaymentMethodIds = $this->pluginConfig->getSafePaymentMethods();
         return in_array($paymentMethodId, $safePaymentMethodIds);
     }
 
-    public function isUnsafe(string $paymentMethodId): bool
+    /**
+     * @param string $paymentMethodId
+     * @return bool
+     */
+    public function isUnsafe($paymentMethodId)
     {
         $unsafePaymentMethodIds = $this->pluginConfig->getUnsafePaymentMethods();
         return in_array($paymentMethodId, $unsafePaymentMethodIds);
     }
 
-    public function isNotConfigured(string $paymentMethodId): bool
+    /**
+     * @param string $paymentMethodId
+     * @return bool
+     */
+    public function isNotConfigured($paymentMethodId)
     {
         return !$this->isIgnored($paymentMethodId)
             && !$this->isSafe($paymentMethodId)

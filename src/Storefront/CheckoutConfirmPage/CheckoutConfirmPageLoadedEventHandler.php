@@ -66,12 +66,12 @@ class CheckoutConfirmPageLoadedEventHandler
         $salesChannelContext = $event->getSalesChannelContext();
         $selectedPaymentMethod = $salesChannelContext->getPaymentMethod();
 
-        return $this->checkoutClient->mustShowCreditCheckAgreement($selectedPaymentMethod->getId());
+        return boolval($this->checkoutClient->mustShowCreditCheckAgreement($selectedPaymentMethod->getId()));
     }
 
     private function getCreditCheckAgreementInfo(CheckoutConfirmPageLoadedEvent $event): string
     {
-        return $this->checkoutClient->getCreditCheckAgreementInfo();
+        return strval($this->checkoutClient->getCreditCheckAgreementInfo());
     }
 
     private function extendPage(

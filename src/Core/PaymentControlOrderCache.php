@@ -33,7 +33,10 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
         $this->dtoArrayMapper = $dtoArrayMapper;
     }
 
-    public function getCheckResponse(): ?PaymentControlCheckResponseDto
+    /**
+     * @return \Axytos\ECommerce\DataTransferObjects\PaymentControlCheckResponseDto|null
+     */
+    public function getCheckResponse()
     {
         $customFields = $this->orderEntityRepository->getCustomFields($this->orderId, $this->getContext());
 
@@ -44,7 +47,11 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
         return $this->dtoArrayMapper->fromArray($customFields[self::CUSTOM_FIELD_NAME_CHECK_RESPONSE], PaymentControlCheckResponseDto::class);
     }
 
-    public function setCheckResponse(PaymentControlCheckResponseDto $checkResponse): void
+    /**
+     * @param \Axytos\ECommerce\DataTransferObjects\PaymentControlCheckResponseDto $checkResponse
+     * @return void
+     */
+    public function setCheckResponse($checkResponse)
     {
         $customFields = [
             self::CUSTOM_FIELD_NAME_CHECK_RESPONSE => $this->dtoArrayMapper->toArray($checkResponse)
@@ -53,7 +60,10 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
         $this->orderEntityRepository->updateCustomFields($this->orderId, $customFields, $this->getContext());
     }
 
-    public function getCheckRequestHash(): ?string
+    /**
+     * @return string|null
+     */
+    public function getCheckRequestHash()
     {
         $customFields = $this->orderEntityRepository->getCustomFields($this->orderId, $this->getContext());
 
@@ -64,7 +74,11 @@ class PaymentControlOrderCache implements PaymentControlCacheInterface
         return $customFields[self::CUSTOM_FIELD_NAME_DATA_HASH];
     }
 
-    public function setCheckRequestHash(string $hash): void
+    /**
+     * @param string $hash
+     * @return void
+     */
+    public function setCheckRequestHash($hash)
     {
         $customFields = [
             self::CUSTOM_FIELD_NAME_DATA_HASH => $hash
